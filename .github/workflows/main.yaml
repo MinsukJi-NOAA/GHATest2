@@ -11,8 +11,6 @@ jobs:
         run: |
           sudo docker pull minsukjinoaa/ci-test-base:ubuntu20.04
           sudo docker save minsukjinoaa/ci-test-base:ubuntu20.04 | gzip >my-ci-test.tar.gz
-          sudo docker rmi minsukjinoaa/ci-test-base:ubuntu20.04
-          sudo docker load --input my-ci-test.tar.gz
           ls -la
 
       - name: upload image
@@ -28,7 +26,8 @@ jobs:
     steps:
       - name: download image
         uses: actions/download-artifact@v2
-
+        with:
+          name: my-ci-test.tar.gz
 
       - name: load image
         run: |
