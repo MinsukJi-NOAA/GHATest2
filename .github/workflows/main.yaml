@@ -30,5 +30,6 @@ jobs:
 
       - name: load image
         run: |
-          docker load <my-ci-test.tar.gz
+          pwd
           ls -la
+          docker load <my-ci-test.tar.gz
