@@ -27,4 +27,4 @@ jobs:
         uses: actions/download-artifact@v2
 
       - name: load image
-        run: docker load <my-ci-test.tar.gz
+        run: docker load <${GITHUB_WORKSPACE}/my-ci-test.tar.gz
