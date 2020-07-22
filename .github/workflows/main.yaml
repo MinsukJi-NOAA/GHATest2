@@ -1,0 +1,23 @@
+name: github actions test2
+
+on: push
+
+jobs:
+  job1:
+    name: first job
+    steps:
+      - name: pull docker img
+        run: docker pull minsukjinoaa/ci-test-base:ubuntu20.04
+
+      - name: upload image
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image
+          path: /var/lib/docker
+
+  job2:
+    name: second job
+    steps:
+      - name: download image
+        uses: actions/download-artifact@v2
+
