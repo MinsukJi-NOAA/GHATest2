@@ -8,13 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: pull docker img
-        run: docker pull minsukjinoaa/ci-test-base:ubuntu20.04
+        run: |
+          docker pull minsukjinoaa/ci-test-base:ubuntu20.04
+          docker save minsukjinoaa/ci-test-base:ubuntu20.04 | gzip >my-ci-test.tar.gz
 
       - name: upload image
         uses: actions/upload-artifact@v2
         with:
-          name: docker-image
-          path: /var/lib/docker
+          name: my-ci-test
+          path: my-ci-test.tar.gz
 
   job2:
     name: second job
@@ -24,3 +26,5 @@ jobs:
       - name: download image
         uses: actions/download-artifact@v2
 
+      - name: load image
+        run: | docker load <my-ci-test.tar.gz
