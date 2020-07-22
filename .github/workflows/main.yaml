@@ -11,11 +11,12 @@ jobs:
         run: |
           docker pull minsukjinoaa/ci-test-base:ubuntu20.04
           docker save minsukjinoaa/ci-test-base:ubuntu20.04 | gzip >my-ci-test.tar.gz
+          ls -la
 
       - name: upload image
         uses: actions/upload-artifact@v2
         with:
-          name: my-ci-test
+          name: my-ci-test.tar.gz
           path: my-ci-test.tar.gz
 
   job2:
@@ -26,5 +27,8 @@ jobs:
       - name: download image
         uses: actions/download-artifact@v2
 
+
       - name: load image
-        run: docker load <${GITHUB_WORKSPACE}/my-ci-test.tar.gz
+        run: |
+          docker load <my-ci-test.tar.gz
+          ls -la
