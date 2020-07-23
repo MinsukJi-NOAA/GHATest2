@@ -22,7 +22,8 @@ jobs:
   job2:
     name: second job
     needs: job1
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: download image
         uses: actions/download-artifact@v2
